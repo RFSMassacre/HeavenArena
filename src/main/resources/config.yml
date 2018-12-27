@@ -1,0 +1,60 @@
+barrier:
+  velocity: -5.0
+  y: 1.0
+
+announcements:
+  game-starting: true
+  game-started: true
+  game-ended: true
+
+titles:
+  battle:
+    fade-in: 5
+    stay: 60
+    fade-out: 5
+  conclude:
+    fade-in: 20
+    stay: 160
+    fade-out: 20
+
+game:
+  #In second
+  start-time: 30
+  end-time: 10
+
+skirmish:
+  #In seconds
+  battle-time: 300
+
+tdm:
+  #In seconds
+  battle-time: 600
+  #Number of kills per player in team
+  max-points: 5
+
+ctf:
+  #In seconds
+  battle-time: 600
+  #Number of caps
+  max-points: 3
+  #Allow spells
+  cast-spells: true
+  #Sounds
+  sounds:
+    pick-up: BLOCK_PISTON_CONTRACT
+    drop: ENTITY_ILLUSION_ILLAGER_MIRROR_MOVE
+    cap: ENTITY_ELDER_GUARDIAN_CURSE
+    reset: ENTITY_PLAYER_LEVELUP
+
+koth:
+  #In seconds
+  battle-time: 600
+  #Number of seconds while captured to win
+  max-points: 200
+
+time-out: 2400 #In ticks
+
+rewards: 150 #Per multiplier
+
+scoreboards:
+  health-icon: "&c❤ &7/ &f40 &c❤"

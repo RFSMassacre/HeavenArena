@@ -1,0 +1,95 @@
+prefix: "&e&lHeaven&6&lArena &f&l> &f"
+
+error:
+  invalid-args: "&7Invalid arguments. Type /{command} for more information."
+  no-perms: "&cYou don't have permission to use this command!"
+  no-console: "&cOnly players can run this command!"
+  in-game: "&cYou're already in a game!"
+  in-queue: "&cYou're already in a queue."
+  no-game: "&cYou're not in a game!"
+  no-players: "&cNot enough players!"
+  no-queue: "&cYou're not queued."
+
+arena:
+  info: "&7This plugin is running version &e1.0-SNAPSHOT&7."
+  reloaded: "&ePlugin reloaded!"
+  invalid-type: "&cInvalid arena type!"
+  invalid-arena: "&cArena not found."
+  invalid-state: "&cThis arena must be &e{type}&c."
+  create-successful: "&aArena successfully created."
+  delete-successful: "&aArena successfully deleted."
+  exit:
+    invalid-args: "&cYou must supply the Arena!"
+    successful: "&aArena exit successfully created."
+  phase:
+    invalid-phase: "&cInvalid Arena Phase!"
+    invalid-args: "&cYou must supply the Arena and the Phase!"
+    successful: "&aArena Phase set to &b{phase}&a."
+  position:
+    invalid-position: "&cYou must specify whether Position &e1 &cor Position &e2&c!"
+    invalid-args: "&cYou must supply the Arena and Position!"
+    position1-successful: "&aPosition 1 set!"
+    position2-successful: "&aPosition 2 set! Region has been set."
+    position2-failed: "&cYou must set Position 1 first."
+  point:
+    invalid-args: "&cYou must supply the Arena and the number of seconds to capture the objective!"
+    invalid-seconds: "&cThe number of seconds must be more than 0!"
+    no-point: "&cYou must set up the point first with &4/arena pointregion <arena> <position>&c!"
+    successful: "&aCapture time set!"
+
+team:
+  create:
+    invalid-args: "&cYou must supply the Arena and the Team Color!"
+    successful: "&aTeam {team} &acreated!"
+  delete:
+    invalid-args: "&cYou must supply the Arena and the Team Color!"
+    successful: "&aTeam {team} &adeleted!"
+  lobby:
+    invalid-args: "&cYou must supply the Arena, the Team Color, and the Position!"
+    successful: "&aPosition 2 set! {team} &aLobby created!"
+  spawn:
+    invalid-args: "&cYou must supply the Arena and the Team Color!"
+    successful: "&a{team} &aSpawn created!"
+  size:
+    invalid-args: "&cYou must supply the Arena, the Team Color, minimum size, and maximum size!"
+    invalid-size: "&cYou must set a minimum and a maximum. The maximum has to be more than the minimum!"
+    successful: "&a{team} &aSize set!"
+  flag:
+    invalid-args: "&cYou must supply the Arena and the Team Color!"
+    successful: "&a{team} &aFlag set!"
+  invalid-color: "&cInvalid color!"
+  invalid-team: "&cInvalid team!"
+
+game:
+  no-arenas: "&cThere are no arenas up."
+  force-start: "&eThe next game has been started."
+  not-enough-players: "&cThere is not enough players to continue game. Ending early..."
+  joined:
+    queue: "&7You've been queued for the next game!"
+    game: "&7You've joined &e{type}&7!"
+    team: "&7You are now in the &r{team} Team&7."
+  left:
+    queue: "&7You've left the queue."
+    game: "&7You've left &e{type}&7."
+  starting: "&e{type} &6is about to start! Type &c/queue &6to join!"
+  started: "&e{type} &ahas started."
+  ended: "&e{type} &6has ended."
+
+ctf:
+  flag:
+    picked-up: "&e{player} &7has picked up the &f{color} Flag&7!"
+    dropped: "&7The &f{color} Flag &7has been dropped."
+    reset: "&7The &f{color} Flag &7has been brought back to base."
+    capped: "&e{player} &7has captured the &f{color} Flag&7!"
+  cant-cast: "&cYou cannot cast spells while holding the flag!"
+
+koth:
+  point:
+    contesting: "&7The &f{color} Team &7is on the objective!"
+    captured: "&7The &f{color} Team &7captured the point!"
+
+list:
+  no-arenas: "&cThere are currently no arenas."
+  all-arenas: "&eArenas... &7{arenas}"
+
+info: "\n\n&e{arena} &6Arena\n&b{type}\n&d{phase}\n"

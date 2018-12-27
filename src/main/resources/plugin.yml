@@ -1,0 +1,15 @@
+name: HeavenArena
+author: RFSMassacre
+version: 1.0
+api-version: 1.12
+main: us.rfsmassacre.heavenarena.ArenaPlugin
+softdepend: [MagicSpells]
+commands:
+  arena:
+    usage: "/arena"
+    permission: heavenarena.arena
+    default: op
+  queue:
+    usage: "/queue"
+    permission: heavenarena.queue
+    default: true
