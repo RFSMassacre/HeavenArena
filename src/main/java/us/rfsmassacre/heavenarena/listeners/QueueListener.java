@@ -22,6 +22,7 @@ import us.rfsmassacre.heavenlib.managers.LocaleManager;
 
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.Random;
 
 public class QueueListener implements Listener
 {
@@ -71,7 +72,7 @@ public class QueueListener implements Listener
 
         if (!openArenas.isEmpty())
         {
-            Collections.shuffle(openArenas);
+            Collections.shuffle(openArenas, new Random(System.currentTimeMillis()));
             return openArenas.getFirst();
         }
 

@@ -11,10 +11,12 @@ import us.rfsmassacre.heavenarena.arenas.enums.ArenaTeam;
 import us.rfsmassacre.heavenarena.events.arena.ArenaEndingEvent;
 import us.rfsmassacre.heavenarena.events.koth.PointCaptureEvent;
 import us.rfsmassacre.heavenarena.scoreboards.ArenaScoreboard;
+import us.rfsmassacre.heavenlib.managers.ConfigManager;
 import us.rfsmassacre.heavenlib.managers.LocaleManager;
 
 public class PointUpdateTask extends BukkitRunnable
 {
+    private ConfigManager config;
     private KOTHArena arena;
     private ArenaPoint point;
     private ArenaScoreboard scoreboard;
@@ -22,8 +24,9 @@ public class PointUpdateTask extends BukkitRunnable
 
     private ChatColor previousColor;
 
-    public PointUpdateTask(KOTHArena arena, ArenaScoreboard scoreboard, int maxCap)
+    public PointUpdateTask(ConfigManager config, KOTHArena arena, ArenaScoreboard scoreboard, int maxCap)
     {
+        this.config = config;
         this.arena = arena;
         this.point = arena.getPoint();
         this.scoreboard = scoreboard;
@@ -37,12 +40,15 @@ public class PointUpdateTask extends BukkitRunnable
         if (color != null)
         {
             //Cancel points if enemy is on it
-            for (Player player : point.getContestants())
+            if (config.getBoolean("stop-points"))
             {
-                ArenaTeam team = arena.getTeam(player);
-                if (!team.getColor().equals(color))
+                for (Player player : point.getContestants())
                 {
-                    return;
+                    ArenaTeam team = arena.getTeam(player);
+                    if (!team.getColor().equals(color))
+                    {
+                        return;
+                    }
                 }
             }
 

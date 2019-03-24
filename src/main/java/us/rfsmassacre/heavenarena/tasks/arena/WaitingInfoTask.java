@@ -27,7 +27,7 @@ public class WaitingInfoTask extends BukkitRunnable
             Player player = Bukkit.getPlayer(playerId);
             if (player != null)
             {
-                locale.sendActionMessage(player, "&e" + Integer.toString(queue.getSize()) + " players waiting...");
+                locale.sendActionMessage(player, "&e" + queue.getSize() + " players waiting...");
             }
         }
 

@@ -20,6 +20,8 @@ import us.rfsmassacre.heavenarena.managers.ArenaManager;
 import us.rfsmassacre.heavenlib.managers.ConfigManager;
 import us.rfsmassacre.heavenlib.managers.LocaleManager;
 
+import java.util.List;
+
 public class SpellListener implements Listener
 {
     private ConfigManager config;
@@ -73,17 +75,24 @@ public class SpellListener implements Listener
     @EventHandler(ignoreCancelled = true)
     public void onFlagSpellCast(SpellCastEvent event)
     {
-        if (!config.getBoolean("ctf.cast-spells"))
+        Player caster = event.getCaster();
+        if (caster != null)
         {
-            Player caster = event.getCaster();
-            if (caster != null)
+            Arena arena = arenas.getArena(caster);
+            if (arena != null && arena.getType().equals(ArenaType.CAPTURE_THE_FLAG))
             {
-                Arena arena = arenas.getArena(caster);
-                if (arena != null && arena.getType().equals(ArenaType.CAPTURE_THE_FLAG))
+                CTFArena ctfArena = (CTFArena) arena;
+                ArenaFlag flag = ctfArena.getFlag(caster);
+                List<String> allowedSpells = config.getStringList("ctf.allowed-spells");
+                List<String> blockedSpells = config.getStringList("ctf.blocked-spells");
+
+                if (flag != null)
                 {
-                    CTFArena ctfArena = (CTFArena) arena;
-                    ArenaFlag flag = ctfArena.getFlag(caster);
-                    if (flag != null)
+                    if (!config.getBoolean("ctf.cast-spells") && !allowedSpells.contains(event.getSpell().getInternalName()))
+                    {
+                        event.setCancelled(true);
+                    }
+                    else if (config.getBoolean("ctf.cast-spells") && blockedSpells.contains(event.getSpell().getInternalName()))
                     {
                         event.setCancelled(true);
                     }

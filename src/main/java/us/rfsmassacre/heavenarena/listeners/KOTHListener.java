@@ -23,7 +23,7 @@ import us.rfsmassacre.heavenarena.events.koth.PointLeaveEvent;
 import us.rfsmassacre.heavenarena.managers.ArenaManager;
 import us.rfsmassacre.heavenarena.scoreboards.ArenaScoreboard;
 import us.rfsmassacre.heavenarena.scoreboards.TeamScore;
-import us.rfsmassacre.heavenarena.tasks.arena.BattleCountdownTask;
+import us.rfsmassacre.heavenarena.tasks.koth.KOTHCountdownTask;
 import us.rfsmassacre.heavenarena.tasks.koth.MeterUpdateTask;
 import us.rfsmassacre.heavenarena.tasks.koth.PointUpdateTask;
 import us.rfsmassacre.heavenlib.managers.ConfigManager;
@@ -108,8 +108,9 @@ public class KOTHListener implements Listener
             KOTHArena kothArena = (KOTHArena)arena;
 
             //Start countdown
+            int time = config.getInt("koth.battle-time");
             ArenaScoreboard scoreboard = scoreboards.get(kothArena);
-            BattleCountdownTask battleTask = new BattleCountdownTask(locale, kothArena, scoreboard);
+            KOTHCountdownTask battleTask = new KOTHCountdownTask(locale, kothArena, scoreboard, time);
             battleTask.runTaskTimer(plugin, 0, 20);
 
             //Start meter updater
@@ -117,7 +118,8 @@ public class KOTHListener implements Listener
             meterTask.runTaskTimer(plugin, 0, 20);
 
             //Start point updater
-            PointUpdateTask pointTask = new PointUpdateTask(kothArena, scoreboard, config.getInt("koth.max-points"));
+            int max = config.getInt("koth.max-points");
+            PointUpdateTask pointTask = new PointUpdateTask(config, kothArena, scoreboard, max);
             pointTask.runTaskTimer(plugin, 0, 20);
         }
     }

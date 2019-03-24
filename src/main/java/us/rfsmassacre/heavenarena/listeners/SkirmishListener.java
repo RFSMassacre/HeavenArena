@@ -11,7 +11,7 @@ import us.rfsmassacre.heavenarena.arenas.enums.ArenaType;
 import us.rfsmassacre.heavenarena.events.arena.ArenaBattleEvent;
 import us.rfsmassacre.heavenarena.events.arena.ArenaEndingEvent;
 import us.rfsmassacre.heavenarena.events.arena.ArenaTieEvent;
-import us.rfsmassacre.heavenarena.tasks.arena.BattleCountdownTask;
+import us.rfsmassacre.heavenarena.tasks.skirmish.SkirmishCountdownTask;
 import us.rfsmassacre.heavenlib.managers.ConfigManager;
 import us.rfsmassacre.heavenlib.managers.LocaleManager;
 
@@ -40,7 +40,8 @@ public class SkirmishListener implements Listener
             SkirmishArena skirmishArena = (SkirmishArena)arena;
 
             //Start countdown
-            BattleCountdownTask battleTask = new BattleCountdownTask(locale, skirmishArena, null);
+            int time = config.getInt("skirmish.battle-time");
+            SkirmishCountdownTask battleTask = new SkirmishCountdownTask(locale, skirmishArena, null, time);
             battleTask.runTaskTimer(plugin, 0, 20);
         }
     }

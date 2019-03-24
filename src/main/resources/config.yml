@@ -45,6 +45,22 @@ ctf:
     drop: ENTITY_ILLUSION_ILLAGER_MIRROR_MOVE
     cap: ENTITY_ELDER_GUARDIAN_CURSE
     reset: ENTITY_PLAYER_LEVELUP
+  #Allowed Spells
+  allowed-spells:
+    - onHumanPassive
+    - onKitChangeGolem
+    - onKitChangeOcelot
+    - onKitChangeSpider
+    - morphToHuman
+    - noHead
+    - noChest
+    - noLegs
+    - noBoots
+    - clearPotions
+    - takeWoodSword
+    - takeStoneSword
+    - takeIronSword
+    - giveGoldSword
 
 koth:
   #In seconds

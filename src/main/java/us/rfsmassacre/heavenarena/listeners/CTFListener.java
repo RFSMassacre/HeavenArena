@@ -26,7 +26,7 @@ import us.rfsmassacre.heavenarena.events.ctf.FlagResetEvent;
 import us.rfsmassacre.heavenarena.managers.ArenaManager;
 import us.rfsmassacre.heavenarena.scoreboards.ArenaScoreboard;
 import us.rfsmassacre.heavenarena.scoreboards.TeamScore;
-import us.rfsmassacre.heavenarena.tasks.arena.BattleCountdownTask;
+import us.rfsmassacre.heavenarena.tasks.ctf.CTFCountdownTask;
 import us.rfsmassacre.heavenarena.tasks.ctf.FlagHelmetTask;
 import us.rfsmassacre.heavenlib.managers.ConfigManager;
 import us.rfsmassacre.heavenlib.managers.LocaleManager;
@@ -120,8 +120,9 @@ public class CTFListener implements Listener
             CTFArena ctfArena = (CTFArena)arena;
 
             //Start countdown
+            int time = config.getInt("ctf.battle-time");
             ArenaScoreboard scoreboard = scoreboards.get(ctfArena);
-            BattleCountdownTask battleTask = new BattleCountdownTask(locale, ctfArena, scoreboard);
+            CTFCountdownTask battleTask = new CTFCountdownTask(locale, ctfArena, scoreboard, time);
             battleTask.runTaskTimer(plugin, 0, 20);
         }
     }

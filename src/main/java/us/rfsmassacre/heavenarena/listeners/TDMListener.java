@@ -14,7 +14,7 @@ import us.rfsmassacre.heavenarena.events.arena.*;
 import us.rfsmassacre.heavenarena.managers.ArenaManager;
 import us.rfsmassacre.heavenarena.scoreboards.ArenaScoreboard;
 import us.rfsmassacre.heavenarena.scoreboards.TeamScore;
-import us.rfsmassacre.heavenarena.tasks.arena.BattleCountdownTask;
+import us.rfsmassacre.heavenarena.tasks.tdm.TDMCountdownTask;
 import us.rfsmassacre.heavenlib.managers.ConfigManager;
 import us.rfsmassacre.heavenlib.managers.LocaleManager;
 
@@ -72,7 +72,7 @@ public class TDMListener implements Listener
             //Start countdown
             int time = config.getInt("tdm.battle-time");
             ArenaScoreboard scoreboard = scoreboards.get(tdmArena);
-            BattleCountdownTask battleTask = new BattleCountdownTask(locale, tdmArena, scoreboard);
+            TDMCountdownTask battleTask = new TDMCountdownTask(locale, tdmArena, scoreboard, time);
             battleTask.runTaskTimer(plugin, 0, 20);
         }
     }
