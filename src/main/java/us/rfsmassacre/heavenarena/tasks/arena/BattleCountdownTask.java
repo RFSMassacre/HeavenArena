@@ -47,6 +47,7 @@ public abstract class BattleCountdownTask extends BukkitRunnable
         {
             endCycle();
         }
+        seconds--;
     }
 
     //Define this and it should be run first.
@@ -101,8 +102,6 @@ public abstract class BattleCountdownTask extends BukkitRunnable
                 {
                     locale.sendLocale(player, "game.not-enough-players");
                 }
-
-                seconds--;
             }
         }
     }
