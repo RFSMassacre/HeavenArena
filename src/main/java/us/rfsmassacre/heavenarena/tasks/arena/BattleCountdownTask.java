@@ -79,8 +79,8 @@ public abstract class BattleCountdownTask extends BukkitRunnable
                 //When there's no time left, assume it's overtime
                 if (seconds <= 0)
                 {
-                    redMessage += " &7&l| &6OVERTIME";
-                    blueMessage += " &7&l| &6OVERTIME";
+                    redMessage += " &7&l| &6&lOVERTIME";
+                    blueMessage += " &7&l| &6&lOVERTIME";
                 }
                 else
                 {
