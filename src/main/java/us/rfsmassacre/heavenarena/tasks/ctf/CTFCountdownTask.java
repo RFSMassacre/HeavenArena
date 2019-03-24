@@ -3,8 +3,11 @@ package us.rfsmassacre.heavenarena.tasks.ctf;
 import us.rfsmassacre.heavenarena.arenas.Arena;
 import us.rfsmassacre.heavenarena.arenas.CTFArena;
 import us.rfsmassacre.heavenarena.scoreboards.ArenaScoreboard;
+import us.rfsmassacre.heavenarena.scoreboards.TeamScore;
 import us.rfsmassacre.heavenarena.tasks.arena.BattleCountdownTask;
 import us.rfsmassacre.heavenlib.managers.LocaleManager;
+
+import java.util.ArrayList;
 
 public class CTFCountdownTask extends BattleCountdownTask
 {
@@ -17,9 +20,13 @@ public class CTFCountdownTask extends BattleCountdownTask
     protected boolean overtime()
     {
         CTFArena ctfArena = (CTFArena)arena;
-        if (!ctfArena.getFlagCarriers().isEmpty())
+        ArrayList<TeamScore> winningScores = scoreboard.getWinningTeamScores();
+        if (winningScores.size() > 1)
         {
-            return true;
+            if (!ctfArena.getFlagCarriers().isEmpty())
+            {
+                return true;
+            }
         }
 
         return false;
