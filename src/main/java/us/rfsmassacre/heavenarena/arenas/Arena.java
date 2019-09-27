@@ -172,4 +172,14 @@ public class Arena
         }
         return size;
     }
+    public boolean isFull()
+    {
+        int maxSize = 0;
+        for (ArenaTeam team : getTeams())
+        {
+            maxSize += team.getMaxMembers();
+        }
+
+        return getSize() >= maxSize;
+    }
 }

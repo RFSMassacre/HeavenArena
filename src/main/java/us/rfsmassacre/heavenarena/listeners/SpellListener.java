@@ -91,10 +91,12 @@ public class SpellListener implements Listener
                     if (!config.getBoolean("ctf.cast-spells") && !allowedSpells.contains(event.getSpell().getInternalName()))
                     {
                         event.setCancelled(true);
+                        locale.sendLocale(caster, "ctf.cant-cast");
                     }
                     else if (config.getBoolean("ctf.cast-spells") && blockedSpells.contains(event.getSpell().getInternalName()))
                     {
                         event.setCancelled(true);
+                        locale.sendLocale(caster, "ctf.cant-cast");
                     }
                 }
             }
@@ -107,12 +109,19 @@ public class SpellListener implements Listener
     @EventHandler(ignoreCancelled = true)
     public void onFlagPickup(FlagPickupEvent event)
     {
-        if (!config.getBoolean("ctf.cast-spells"))
+        Player carrier = event.getCarrier();
+        List<String> allowedSpells = config.getStringList("ctf.allowed-spells");
+        List<String> blockedSpells = config.getStringList("ctf.blocked-spells");
+        if (MagicSpells.getBuffManager().getActiveBuffs(carrier) != null)
         {
-            Player carrier = event.getCarrier();
-            if (MagicSpells.getBuffManager().getActiveBuffs(carrier) != null)
+            for (BuffSpell buff : MagicSpells.getBuffManager().getActiveBuffs(carrier))
             {
-                for (BuffSpell buff : MagicSpells.getBuffManager().getActiveBuffs(carrier))
+                if (!config.getBoolean("ctf.cast-spells") && !allowedSpells.contains(buff.getInternalName()))
+                {
+                    buff.turnOff(carrier);
+                    locale.sendLocale(carrier, "ctf.cant-cast");
+                }
+                else if (config.getBoolean("ctf.cast-spells") && blockedSpells.contains(buff.getInternalName()))
                 {
                     buff.turnOff(carrier);
                     locale.sendLocale(carrier, "ctf.cant-cast");

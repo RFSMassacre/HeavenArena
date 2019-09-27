@@ -72,6 +72,15 @@ public class TDMListener implements Listener
             //Start countdown
             int time = config.getInt("tdm.battle-time");
             ArenaScoreboard scoreboard = scoreboards.get(tdmArena);
+
+            //Set max score based on how many players per team
+            int maxScore = 0;
+            int maxKills = config.getInt("tdm.max-points");
+            for (ArenaTeam team : tdmArena.getTeams())
+            {
+                maxScore += team.getMembers().size() * maxKills;
+            }
+            scoreboard.setMaxScore(maxScore);
             TDMCountdownTask battleTask = new TDMCountdownTask(locale, tdmArena, scoreboard, time);
             battleTask.runTaskTimer(plugin, 0, 20);
         }
@@ -101,7 +110,7 @@ public class TDMListener implements Listener
                         ArenaScoreboard scoreboard = scoreboards.get(tdmArena);
                         if (scoreboard != null)
                         {
-                            int maxKills = config.getInt("tdm.max-points");
+                            int maxKills = scoreboard.getMaxScore();
 
                             scoreboard.addScore(enemyTeam.getColor(), 1);
                             if (scoreboard.getScore(enemyTeam.getColor()) >= maxKills)

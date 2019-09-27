@@ -1,12 +1,14 @@
 package us.rfsmassacre.heavenarena.events.queue;
 
+import org.bukkit.entity.Player;
+
 public class QueueJoinEvent extends QueueEvent
 {
     private boolean force;
 
-    public QueueJoinEvent(boolean force)
+    public QueueJoinEvent(Player player, boolean force)
     {
-        super();
+        super(player);
 
         this.force = force;
     }

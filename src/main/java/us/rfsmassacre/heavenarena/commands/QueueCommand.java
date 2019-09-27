@@ -69,7 +69,7 @@ public class QueueCommand extends SpigotCommand
                         {
                             locale.sendLocale(sender, "game.joined.queue");
 
-                            QueueJoinEvent event = new QueueJoinEvent(false);
+                            QueueJoinEvent event = new QueueJoinEvent(player, false);
                             Bukkit.getPluginManager().callEvent(event);
                             return;
                         }
@@ -108,7 +108,7 @@ public class QueueCommand extends SpigotCommand
                 {
                     locale.sendLocale(sender, "game.left.queue");
 
-                    QueueLeaveEvent event = new QueueLeaveEvent();
+                    QueueLeaveEvent event = new QueueLeaveEvent(player);
                     Bukkit.getPluginManager().callEvent(event);
                     return;
                 }
@@ -157,7 +157,7 @@ public class QueueCommand extends SpigotCommand
         {
             if (queue.getSize() > 1)
             {
-                QueueJoinEvent event = new QueueJoinEvent(true);
+                QueueJoinEvent event = new QueueJoinEvent(null, true);
                 Bukkit.getPluginManager().callEvent(event);
 
                 locale.sendLocale(sender, "game.force-start");

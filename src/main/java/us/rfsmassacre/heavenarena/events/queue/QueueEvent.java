@@ -20,7 +20,13 @@ public abstract class QueueEvent extends Event implements Cancellable
         return HANDLERS;
     }
 
+    private Player player;
     private boolean cancel;
+
+    public QueueEvent(Player player)
+    {
+        this.player = player;
+    }
 
     @Override
     public boolean isCancelled()
@@ -31,5 +37,10 @@ public abstract class QueueEvent extends Event implements Cancellable
     public void setCancelled(boolean cancel)
     {
         this.cancel = cancel;
+    }
+
+    public Player getPlayer()
+    {
+        return player;
     }
 }

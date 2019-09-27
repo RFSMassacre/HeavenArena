@@ -126,35 +126,32 @@ public class QueueListener implements Listener
         {
             if (currentArena.getPhase().equals(ArenaPhase.WAITING))
             {
-                int maximum = 0;
+                int minimum = 0;
                 for (ArenaTeam team : currentArena.getTeams())
                 {
-                    maximum += team.getMaxMembers();
+                    minimum += team.getMinMembers();
                 }
 
-                if (queue.getSize() >= maximum || event.isForced())
+                if (queue.getSize() >= minimum || event.isForced())
                 {
                     LinkedList<ArenaTeam> teams = new LinkedList<ArenaTeam>();
                     teams.addAll(currentArena.getTeams());
 
-                    while (queue.getSize() > 0)
+                    while (queue.getSize() > 0 && !currentArena.isFull())
                     {
                         //Sort teams and add player to least member team
                         //If full, it'll try again for a different team.
                         Collections.sort(teams);
                         ArenaTeam team = teams.getFirst();
                         Player player = queue.peekPlayer();
-                        if (player != null)
+                        if (player != null && team.addMember(player))
                         {
-                            if (team.addMember(player))
-                            {
-                                ArenaJoinEvent joinEvent = new ArenaJoinEvent(player, currentArena);
-                                Bukkit.getPluginManager().callEvent(joinEvent);
+                            ArenaJoinEvent joinEvent = new ArenaJoinEvent(player, currentArena);
+                            Bukkit.getPluginManager().callEvent(joinEvent);
 
-                                String teamName = team.getColor().toString() + team.getName();
-                                locale.sendLocale(player, "game.joined.team", "{team}", teamName);
-                                queue.removePlayer(player);
-                            }
+                            String teamName = team.getColor().toString() + team.getName();
+                            locale.sendLocale(player, "game.joined.team", "{team}", teamName);
+                            queue.removePlayer(player);
                         }
                     }
 
@@ -180,23 +177,26 @@ public class QueueListener implements Listener
                 LinkedList<ArenaTeam> teams = new LinkedList<ArenaTeam>();
                 teams.addAll(currentArena.getTeams());
 
-                //Sort teams and add player to least member team
-                //If full, it'll try again for a different team.
-                Collections.sort(teams);
-                ArenaTeam team = teams.getFirst();
-                Player player = queue.peekPlayer();
-                if (player != null && team.addMember(player))
+                if (!currentArena.isFull())
                 {
-                    ArenaJoinEvent joinEvent = new ArenaJoinEvent(player, currentArena);
-                    Bukkit.getPluginManager().callEvent(joinEvent);
+                    //Sort teams and add player to least member team
+                    //If full, it'll try again for a different team.
+                    Collections.sort(teams);
+                    ArenaTeam team = teams.getFirst();
+                    Player player = event.getPlayer();
+                    if (player != null && team.addMember(player))
+                    {
+                        ArenaJoinEvent joinEvent = new ArenaJoinEvent(player, currentArena);
+                        Bukkit.getPluginManager().callEvent(joinEvent);
 
-                    String teamName = team.getColor().toString() + team.getName();
-                    locale.sendLocale(player, "game.joined.team", "{team}", teamName);
-                    queue.removePlayer(player);
+                        String teamName = team.getColor().toString() + team.getName();
+                        locale.sendLocale(player, "game.joined.team", "{team}", teamName);
+                        queue.removePlayer(player);
 
-                    player.teleport(team.getSpawn());
-                    String typeName = currentArena.getType().toString();
-                    locale.sendLocale(player, "game.joined.game", "{type}", locale.title(typeName));
+                        player.teleport(team.getSpawn());
+                        String typeName = currentArena.getType().toString();
+                        locale.sendLocale(player, "game.joined.game", "{type}", locale.title(typeName));
+                    }
                 }
             }
         }

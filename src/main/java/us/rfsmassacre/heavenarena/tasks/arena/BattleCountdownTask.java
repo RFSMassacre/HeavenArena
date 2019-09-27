@@ -77,15 +77,15 @@ public abstract class BattleCountdownTask extends BukkitRunnable
                         + redPoints + "&4/&e" + maxPoints + "&4)";
 
                 //When there's no time left, assume it's overtime
-                if (seconds <= 0)
+                if (seconds < 0)
                 {
                     redMessage += " &7&l| &6&lOVERTIME";
                     blueMessage += " &7&l| &6&lOVERTIME";
                 }
                 else
                 {
-                    redMessage += " &7&l| &6" + seconds + " Seconds";
-                    blueMessage += " &7&l| &6" + seconds + " Seconds";
+                    redMessage += " &7&l| &e" + seconds + " Seconds";
+                    blueMessage += " &7&l| &e" + seconds + " Seconds";
                 }
 
                 if (team.getName().equals("RED"))

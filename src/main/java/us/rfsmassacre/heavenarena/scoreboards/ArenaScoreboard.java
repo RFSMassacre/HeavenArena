@@ -183,6 +183,10 @@ public class ArenaScoreboard
     {
         return maxScore;
     }
+    public void setMaxScore(int maxScore)
+    {
+        this.maxScore = maxScore;
+    }
 
     /*
      * Calculating which teams are currently ahead

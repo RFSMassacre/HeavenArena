@@ -32,7 +32,7 @@ public class ArenaTeam implements Comparable<ArenaTeam>
         this.spawn = spawn;
 
         this.maxMembers = 6;
-        this.minMembers = 1;
+        this.minMembers = 3;
     }
 
     public String getName()
